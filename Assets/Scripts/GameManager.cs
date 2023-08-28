@@ -32,3 +32,30 @@ public enum TypeCard
     Enamy
 }
 
+public enum TypeСreature
+{
+    Paladin,
+    Thief,
+    Priest,
+    Mage,
+    Warrior,
+    Scroll,
+    Dragon,
+    Skelenon,
+    Slug,
+    Goblin,
+    Potion,
+    Ttreasures
+}
+
+public enum TypePlayerHero
+{
+    DragonHunter,
+    Sourcerer,
+    Warlock,
+    Templar,
+    Skald,
+    Warlord,
+    Grog,
+    Enchantress
+}
