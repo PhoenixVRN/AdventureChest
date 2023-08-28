@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class CardInfo : MonoBehaviour
 {
-    public RawImage image;
+    public Sprite image;
     public string name;
     public TypeCard typeCard;
     void Start()
