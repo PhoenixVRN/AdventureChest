@@ -4,10 +4,20 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    // Start is called before the first frame update
+    private List<GameObject> _cardsHero;
+    private List<GameObject> _cardsEnamy;
+    private List<GameObject> _treasures;
+    private GameObject _hero;
+    private int countDragon;
+    private int _countRound;
+    private CardDistribution _cardDistribution;
+    
     void Start()
     {
-        
+        _cardDistribution = GetComponent<CardDistribution>();
+        _countRound = 1;
+        _cardDistribution.DistributionCard(1, false);
+        _cardDistribution.DistributionCard(7, true);
     }
 
     // Update is called once per frame
@@ -45,7 +55,7 @@ public enum TypeСreature
     Slug,
     Goblin,
     Potion,
-    Ttreasures
+    Chest
 }
 
 public enum TypePlayerHero
