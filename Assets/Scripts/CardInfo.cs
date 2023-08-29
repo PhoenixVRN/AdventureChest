@@ -5,42 +5,62 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class CardInfo : MonoBehaviour, IPointerDownHandler, IPointerEnterHandler, IPointerExitHandler, IDragHandler, IBeginDragHandler, IEndDragHandler
+public class CardInfo : MonoBehaviour, IPointerDownHandler, IPointerEnterHandler, IPointerExitHandler, IDragHandler,
+    IBeginDragHandler, IEndDragHandler
 {
     public Sprite image;
     public string name;
     public TypeCard typeCard;
-    
+
     private Vector2 lastMousePosition;
 
     private Vector2 _initialPos;
     private Transform oldTransform;
     private int _siblingIndex;
+    private GameObject oldEnamy;
+
     void Start()
     {
-        
     }
 
-    
+
     void Update()
     {
-        
     }
+
     private Vector2 InputPos()
     {
         Vector2 localPoint = Vector2.zero;
-      
-            RectTransformUtility.ScreenPointToLocalPointInRectangle(GameReferance.CanvasGame.GetComponent<RectTransform>(), Input.mousePosition,
-                Camera.main, out localPoint);
-            return localPoint;
+
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(GameReferance.CanvasGame.GetComponent<RectTransform>(),
+            Input.mousePosition,
+            Camera.main, out localPoint);
+        return localPoint;
     }
-    
+
+    public List<RaycastResult> RaycastMouse()
+    {
+        PointerEventData pointerData = new PointerEventData(EventSystem.current)
+        {
+            pointerId = -1,
+        };
+
+        pointerData.position = Input.mousePosition;
+
+        List<RaycastResult> results = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(pointerData, results);
+
+        Debug.Log(results.Count);
+
+        return results;
+    }
+
     public void OnPointerDown(PointerEventData eventData)
     {
-       Debug.Log($"OnPointerDown");
-       _siblingIndex = transform.GetSiblingIndex();
-       transform.SetParent(GameReferance.CanvasGame);
-       transform.DOShakeScale(0.1f, new Vector3(0.4f,0.3f,0f),0,0f,false);
+        Debug.Log($"OnPointerDown");
+        _siblingIndex = transform.GetSiblingIndex();
+        transform.SetParent(GameReferance.CanvasGame);
+        transform.DOShakeScale(0.1f, new Vector3(0.4f, 0.3f, 0f), 0, 0f, false);
     }
 
     public void OnPointerEnter(PointerEventData eventData)
@@ -61,7 +81,35 @@ public class CardInfo : MonoBehaviour, IPointerDownHandler, IPointerEnterHandler
         // transform.position = Input.mousePosition;
         // var t = eventData.position;
         // transform.localPosition= t;
-        transform.localPosition= InputPos();
+        transform.localPosition = InputPos();
+        var k = RaycastMouse();
+        foreach (var VARIABLE in k)
+        {
+            if (VARIABLE.gameObject.GetComponent<CardInfo>() != null)
+            {
+                if (VARIABLE.gameObject.GetComponent<CardInfo>().typeCard == TypeCard.Enamy)
+                {
+                    if (oldEnamy != VARIABLE.gameObject)
+                    {
+                        if (oldEnamy != null)
+                        {
+                            oldEnamy.transform.DOScale(new Vector3(1f, 1f, 0f), 0.5f);
+                        }
+
+                        oldEnamy = VARIABLE.gameObject;
+                        oldEnamy.transform.DOScale(new Vector3(1.2f, 1.2f, 0f), 0.5f);
+                    }
+                }
+                else
+                {
+                    if (oldEnamy != null)
+                    {
+                        oldEnamy.transform.DOScale(new Vector3(1f, 1f, 0f), 0.5f);
+                        oldEnamy = null;
+                    }
+                }
+            }
+        }
         // Vector2 currentMousePosition = eventData.position;
     }
 
