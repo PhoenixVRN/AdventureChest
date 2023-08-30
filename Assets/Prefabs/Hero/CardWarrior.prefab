@@ -84,7 +84,7 @@ GameObject:
   - component: {fileID: 5663113810044451750}
   - component: {fileID: 6817329528197835178}
   - component: {fileID: 1193549766285724714}
-  - component: {fileID: 2461956431349920349}
+  - component: {fileID: 3927359874633166008}
   m_Layer: 5
   m_Name: CardWarrior
   m_TagString: Untagged
@@ -149,7 +149,7 @@ MonoBehaviour:
     y: 0
     width: 1
     height: 1
---- !u!114 &2461956431349920349
+--- !u!114 &3927359874633166008
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -161,8 +161,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cad9f073f704fd040bf472784cfcbb64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  image: {fileID: 21300000, guid: 4654d142a15f1634493708657e259bcb, type: 3}
-  name: Thief
+  image: {fileID: 21300000, guid: 553db5763e2ed4541ac720741f0d555c, type: 3}
+  name: Warrior
   typeCard: 0
 --- !u!1 &4123897270754026398
 GameObject:

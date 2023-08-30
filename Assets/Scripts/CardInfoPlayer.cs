@@ -5,13 +5,10 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class CardInfo : MonoBehaviour, IPointerDownHandler, IPointerEnterHandler, IPointerExitHandler, IDragHandler,
+public class CardInfoPlayer : CardInfoBase, IPointerDownHandler, IPointerEnterHandler, IPointerExitHandler,
+    IDragHandler,
     IBeginDragHandler, IEndDragHandler
 {
-    public Sprite image;
-    public string name;
-    public TypeCard typeCard;
-
     private Vector2 lastMousePosition;
 
     private Vector2 _initialPos;
@@ -50,7 +47,7 @@ public class CardInfo : MonoBehaviour, IPointerDownHandler, IPointerEnterHandler
         List<RaycastResult> results = new List<RaycastResult>();
         EventSystem.current.RaycastAll(pointerData, results);
 
-        Debug.Log(results.Count);
+        // Debug.Log(results.Count);
 
         return results;
     }
@@ -83,32 +80,28 @@ public class CardInfo : MonoBehaviour, IPointerDownHandler, IPointerEnterHandler
         // transform.localPosition= t;
         transform.localPosition = InputPos();
         var k = RaycastMouse();
+        bool isEnamy = false;
         foreach (var VARIABLE in k)
         {
-            if (VARIABLE.gameObject.GetComponent<CardInfo>() != null)
+            if (VARIABLE.gameObject.GetComponent<CardInfoEnamy>() != null)
             {
-                if (VARIABLE.gameObject.GetComponent<CardInfo>().typeCard == TypeCard.Enamy)
-                {
-                    if (oldEnamy != VARIABLE.gameObject)
-                    {
-                        if (oldEnamy != null)
-                        {
-                            oldEnamy.transform.DOScale(new Vector3(1f, 1f, 0f), 0.5f);
-                        }
-
-                        oldEnamy = VARIABLE.gameObject;
-                        oldEnamy.transform.DOScale(new Vector3(1.2f, 1.2f, 0f), 0.5f);
-                    }
-                }
-                else
+                if (oldEnamy != VARIABLE.gameObject)
                 {
                     if (oldEnamy != null)
                     {
                         oldEnamy.transform.DOScale(new Vector3(1f, 1f, 0f), 0.5f);
-                        oldEnamy = null;
                     }
+
+                    isEnamy = true;
+                    oldEnamy = VARIABLE.gameObject;
+                    oldEnamy.transform.DOScale(new Vector3(1.2f, 1.2f, 0f), 0.5f);
                 }
             }
+        }
+        if (oldEnamy != null && !isEnamy)
+        {
+            oldEnamy.transform.DOScale(new Vector3(1f, 1f, 0f), 0.5f);
+            oldEnamy = null;
         }
         // Vector2 currentMousePosition = eventData.position;
     }

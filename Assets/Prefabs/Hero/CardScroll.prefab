@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3665939833609129486}
   - component: {fileID: 1545599901445624279}
   - component: {fileID: 1594877905457741772}
-  - component: {fileID: 6368417242689838400}
+  - component: {fileID: -4345455685469108407}
   m_Layer: 5
   m_Name: CardScroll
   m_TagString: Untagged
@@ -76,7 +76,7 @@ MonoBehaviour:
     y: 0
     width: 1
     height: 1
---- !u!114 &6368417242689838400
+--- !u!114 &-4345455685469108407
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -88,8 +88,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cad9f073f704fd040bf472784cfcbb64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  image: {fileID: 21300000, guid: 4654d142a15f1634493708657e259bcb, type: 3}
-  name: Thief
+  image: {fileID: 21300000, guid: 37245197ce8975540ba24e2665073bc0, type: 3}
+  name: Scroll
   typeCard: 0
 --- !u!1 &8986537773296434151
 GameObject:

@@ -146,7 +146,7 @@ GameObject:
   - component: {fileID: 7599447446095051765}
   - component: {fileID: 2055065056951384813}
   - component: {fileID: 8361750060788849310}
-  - component: {fileID: 5293933954809109874}
+  - component: {fileID: 6829518677310428353}
   m_Layer: 5
   m_Name: CardThief
   m_TagString: Untagged
@@ -211,7 +211,7 @@ MonoBehaviour:
     y: 0
     width: 1
     height: 1
---- !u!114 &5293933954809109874
+--- !u!114 &6829518677310428353
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

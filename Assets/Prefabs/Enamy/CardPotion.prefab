@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5698506490143121032}
   - component: {fileID: 3592549113547787395}
   - component: {fileID: 8179381856515991139}
-  - component: {fileID: 5106634566629992287}
+  - component: {fileID: -477619996720945541}
   m_Layer: 5
   m_Name: CardPotion
   m_TagString: Untagged
@@ -76,7 +76,7 @@ MonoBehaviour:
     y: 0
     width: 1
     height: 1
---- !u!114 &5106634566629992287
+--- !u!114 &-477619996720945541
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -85,11 +85,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 2075061158967160854}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cad9f073f704fd040bf472784cfcbb64, type: 3}
+  m_Script: {fileID: 11500000, guid: 2fb80ae1329acc2468f78339444bbe8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  image: {fileID: 21300000, guid: 5ce7cadfe4dd5c442a30ec05a39e28d5, type: 3}
-  name: Skeleton
+  image: {fileID: 21300000, guid: 0df4344c7563c9e49bc534862cc10dd2, type: 3}
+  name: Potion
   typeCard: 1
 --- !u!1 &5324365248687705210
 GameObject:
