@@ -52,6 +52,38 @@ public class CardInfoPlayer : CardInfoBase, IPointerDownHandler, IPointerEnterHa
         return results;
     }
 
+    private void DetectEnamy()
+    {
+        var k = RaycastMouse();
+        bool isEnamy = false;
+        foreach (var VARIABLE in k)
+        {
+            if (VARIABLE.gameObject.GetComponent<CardInfoEnamy>() != null)
+            {
+                if (oldEnamy != VARIABLE.gameObject)
+                {
+                    if (oldEnamy != null)
+                    {
+                        oldEnamy.transform.DOScale(new Vector3(1f, 1f, 0f), 0.5f);
+                    }
+
+                    isEnamy = true;
+                    oldEnamy = VARIABLE.gameObject;
+                    oldEnamy.transform.DOScale(new Vector3(1.2f, 1.2f, 0f), 0.5f);
+                }
+                else
+                {
+                    isEnamy = true;
+                }
+            }
+        }
+        if (oldEnamy != null && !isEnamy)
+        {
+            oldEnamy.transform.DOScale(new Vector3(1f, 1f, 0f), 0.5f);
+            oldEnamy = null;
+        }
+    }
+
     public void OnPointerDown(PointerEventData eventData)
     {
         Debug.Log($"OnPointerDown");
@@ -79,31 +111,7 @@ public class CardInfoPlayer : CardInfoBase, IPointerDownHandler, IPointerEnterHa
         // var t = eventData.position;
         // transform.localPosition= t;
         transform.localPosition = InputPos();
-        var k = RaycastMouse();
-        bool isEnamy = false;
-        foreach (var VARIABLE in k)
-        {
-            if (VARIABLE.gameObject.GetComponent<CardInfoEnamy>() != null)
-            {
-                if (oldEnamy != VARIABLE.gameObject)
-                {
-                    if (oldEnamy != null)
-                    {
-                        oldEnamy.transform.DOScale(new Vector3(1f, 1f, 0f), 0.5f);
-                    }
-
-                    isEnamy = true;
-                    oldEnamy = VARIABLE.gameObject;
-                    oldEnamy.transform.DOScale(new Vector3(1.2f, 1.2f, 0f), 0.5f);
-                }
-            }
-        }
-        if (oldEnamy != null && !isEnamy)
-        {
-            oldEnamy.transform.DOScale(new Vector3(1f, 1f, 0f), 0.5f);
-            oldEnamy = null;
-        }
-        // Vector2 currentMousePosition = eventData.position;
+        DetectEnamy();
     }
 
     public void OnBeginDrag(PointerEventData eventData)
@@ -115,6 +123,13 @@ public class CardInfoPlayer : CardInfoBase, IPointerDownHandler, IPointerEnterHa
     public void OnEndDrag(PointerEventData eventData)
     {
         Debug.Log($"OnEndDrag");
-        transform.position = _initialPos;
+        if (oldEnamy != null)
+        {
+            // BattlService.Battle(this, oldEnamy.GetComponent<>());
+        }
+        else
+        {
+            transform.position = _initialPos;
+        }
     }
 }

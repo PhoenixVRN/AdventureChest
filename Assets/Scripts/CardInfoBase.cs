@@ -7,4 +7,5 @@ public class CardInfoBase : MonoBehaviour
     public Sprite image;
     public string name;
     public TypeCard typeCard;
+    public TypeСreature TypeСreature;
 }
