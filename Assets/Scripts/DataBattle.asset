@@ -12,3 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af61d258d0c01ce43a406bbdac703e41, type: 3}
   m_Name: DataBattle
   m_EditorClassIdentifier: 
+  alllist:
+  - {fileID: 11400000, guid: 9a8904f696e91d64ab3d6974b3f93419, type: 2}
+  - {fileID: 11400000, guid: 9a8904f696e91d64ab3d6974b3f93419, type: 2}
