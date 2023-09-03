@@ -12,13 +12,40 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcd954347ff6a884bb4db89178c75b9f, type: 3}
   m_Name: UpgradeDataBase
   m_EditorClassIdentifier: 
-  damages:
-  - Level: 1
-    CostGold: 5
-    CostSilver: 50
-    damage: 10
-  attackIntervals: []
-  radiusAttacks: []
-  multiShots: []
-  criticalChances: []
-  criticalMultipliers: []
+  heros:
+  - whoBeats: 0
+    whoIsHitting:
+    - whoIsHitting: 7
+      quantity: 3
+    - whoIsHitting: 8
+      quantity: 3
+    - whoIsHitting: 9
+      quantity: 3
+    - whoIsHitting: 10
+      quantity: 3
+    - whoIsHitting: 11
+      quantity: 3
+  - whoBeats: 1
+    whoIsHitting:
+    - whoIsHitting: 7
+      quantity: 1
+    - whoIsHitting: 8
+      quantity: 1
+    - whoIsHitting: 9
+      quantity: 1
+    - whoIsHitting: 10
+      quantity: 1
+    - whoIsHitting: 11
+      quantity: 3
+  - whoBeats: 2
+    whoIsHitting:
+    - whoIsHitting: 7
+      quantity: 1
+    - whoIsHitting: 8
+      quantity: 1
+    - whoIsHitting: 9
+      quantity: 3
+    - whoIsHitting: 10
+      quantity: 1
+    - whoIsHitting: 11
+      quantity: 0
