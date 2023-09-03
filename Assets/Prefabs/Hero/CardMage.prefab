@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 321913734887595412}
   - component: {fileID: 2619887962783243957}
   - component: {fileID: 7706080235565332452}
-  - component: {fileID: 1957222507459855185}
+  - component: {fileID: 6635838901144558315}
   m_Layer: 5
   m_Name: CardMage
   m_TagString: Untagged
@@ -76,7 +76,7 @@ MonoBehaviour:
     y: 0
     width: 1
     height: 1
---- !u!114 &1957222507459855185
+--- !u!114 &6635838901144558315
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -88,8 +88,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cad9f073f704fd040bf472784cfcbb64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  image: {fileID: 21300000, guid: 4654d142a15f1634493708657e259bcb, type: 3}
-  name: Thief
+  image: {fileID: 21300000, guid: 0a0cb207de2e1b34cb742e39716ed772, type: 3}
+  name: Mage
   typeCard: 0
 --- !u!1 &2272567699275973334
 GameObject:

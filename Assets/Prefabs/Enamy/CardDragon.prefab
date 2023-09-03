@@ -146,7 +146,7 @@ GameObject:
   - component: {fileID: 4553126250595564436}
   - component: {fileID: 7826900364684612578}
   - component: {fileID: 6784807316324663937}
-  - component: {fileID: 5084347107149148145}
+  - component: {fileID: 6074611769435830715}
   m_Layer: 5
   m_Name: CardDragon
   m_TagString: Untagged
@@ -211,7 +211,7 @@ MonoBehaviour:
     y: 0
     width: 1
     height: 1
---- !u!114 &5084347107149148145
+--- !u!114 &6074611769435830715
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -220,12 +220,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 3851566038741543775}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cad9f073f704fd040bf472784cfcbb64, type: 3}
+  m_Script: {fileID: 11500000, guid: 2fb80ae1329acc2468f78339444bbe8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  image: {fileID: 21300000, guid: 5ce7cadfe4dd5c442a30ec05a39e28d5, type: 3}
-  name: Skeleton
-  typeCard: 0
+  image: {fileID: 21300000, guid: 4ad988cfd00255944bebea80952f18e7, type: 3}
+  name: Dragon
+  typeCard: 1
 --- !u!1 &4863678946826532508
 GameObject:
   m_ObjectHideFlags: 0
