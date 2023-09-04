@@ -125,7 +125,7 @@ public class CardInfoPlayer : CardInfoBase, IPointerDownHandler, IPointerEnterHa
         Debug.Log($"OnEndDrag");
         if (oldEnamy != null)
         {
-            // BattlService.Battle(this, oldEnamy.GetComponent<>());
+             BattlService.Instance.Attake(this, oldEnamy.GetComponent<CardInfoEnamy>());
         }
         else
         {

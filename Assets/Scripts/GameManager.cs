@@ -11,16 +11,19 @@ public class GameManager : MonoBehaviour
     private int countDragon;
     private int _countRound;
     private CardDistribution _cardDistribution;
-    
+
+    public List<GameObject> playerCardsInPlay;
+    public List<GameObject> enamyCardsInPlay;
+
     void Start()
     {
-        _cardDistribution = GetComponent<CardDistribution>();
+       _cardDistribution = GetComponent<CardDistribution>();
         _countRound = 1;
-        _cardDistribution.DistributionCard(1, false);
-        _cardDistribution.DistributionCard(7, true);
+        playerCardsInPlay = _cardDistribution.DistributionCard(7, true);
+        enamyCardsInPlay = _cardDistribution.DistributionCard(1, false);
     }
 
-    // Update is called once per frame
+   
     void Update()
     {
         

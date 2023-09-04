@@ -40,6 +40,30 @@ MonoBehaviour:
   - whoBeats: 2
     whoIsHitting:
     - whoIsHitting: 7
+      quantity: 3
+    - whoIsHitting: 8
+      quantity: 1
+    - whoIsHitting: 9
+      quantity: 1
+    - whoIsHitting: 10
+      quantity: 1
+    - whoIsHitting: 11
+      quantity: 1
+  - whoBeats: 3
+    whoIsHitting:
+    - whoIsHitting: 7
+      quantity: 1
+    - whoIsHitting: 8
+      quantity: 3
+    - whoIsHitting: 9
+      quantity: 1
+    - whoIsHitting: 10
+      quantity: 1
+    - whoIsHitting: 11
+      quantity: 1
+  - whoBeats: 4
+    whoIsHitting:
+    - whoIsHitting: 7
       quantity: 1
     - whoIsHitting: 8
       quantity: 1
@@ -48,4 +72,4 @@ MonoBehaviour:
     - whoIsHitting: 10
       quantity: 1
     - whoIsHitting: 11
-      quantity: 0
+      quantity: 1

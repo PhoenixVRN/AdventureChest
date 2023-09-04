@@ -20,7 +20,6 @@ public class CardDistribution : MonoBehaviour
             var card = Instantiate(allCard[Random.Range(0, allCard.Count)], container.transform);
             DistributionCard.Add(card);
         }
-
         return DistributionCard;
     }
 }
