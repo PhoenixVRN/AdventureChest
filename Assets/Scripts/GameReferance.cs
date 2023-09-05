@@ -15,4 +15,8 @@ public static class GameReferance
     
     internal static Transform DragonDang => _dragonDang != null ? _dragonDang : _dragonDang = GameObject.FindObjectOfType<DragonDang>().transform;
     private static Transform _dragonDang;
+    
+    internal static Transform Cemetery => _сemetery != null ? _сemetery : _сemetery = GameObject.FindObjectOfType<Cemetery>().transform;
+    private static Transform _сemetery;
+
 }

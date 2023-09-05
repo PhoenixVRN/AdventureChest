@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
 {
     private List<GameObject> _cardsHero;
     private List<GameObject> _cardsEnamy;
+    
     private List<GameObject> _treasures;
     private GameObject _hero;
     private int countDragon;
@@ -19,6 +20,7 @@ public class GameManager : MonoBehaviour
 
     public List<GameObject> playerCardsInPlay;
     public List<GameObject> enamyCardsInPlay;
+    public List<GameObject> dragonsCardsInPlay;
 
     public TMP_Text textCountDragon;
     public TMP_Text infoPanelText;
@@ -41,6 +43,7 @@ public class GameManager : MonoBehaviour
             {
                 var dragonCard = enamyCardsInPlay[i];
                 dragonCard.transform.SetAsLastSibling();
+                dragonsCardsInPlay.Add(enamyCardsInPlay[i]);
                 enamyCardsInPlay.RemoveAt(i);
                 var l = GameReferance.CanvasGame.transform.TransformPoint(dragonCard.transform.localPosition);
                 dragonCard.GetComponent<LayoutElement>().ignoreLayout = true;
@@ -50,13 +53,7 @@ public class GameManager : MonoBehaviour
                 return;
             }
         }
-        if (countDragon > 2)
-        {
-            //TODO реалидация боя с драконами
-         
-            SetTextPanel("Дракоши голодные");
-            // infoPanelText.text = "Тебя сожрали!\nХа-Ха-Ха\nЛузер!";
-        }
+       
 
         if (enamyCardsInPlay.Count == 0 && countDragon < 3)
         {
@@ -68,19 +65,33 @@ public class GameManager : MonoBehaviour
     {
         infoPanelText.gameObject.SetActive(true);
         infoPanelText.text = text;
+        Invoke("FadeTextPanel", 2f);
     }
 
+    private void FadeTextPanel()
+    {
+        infoPanelText.gameObject.SetActive(false);
+    }
+    
     private void MoveDragon(GameObject dragonCard)
     {
         countDragon++;
         textCountDragon.text = countDragon.ToString();
-        Destroy(dragonCard);
+        dragonCard.SetActive(false);
         ChekDragon();
     }
 
     public void LevelHandler()
     {
+        if (countDragon > 2)
+        {
+            //TODO реалидация боя с драконами
+            SetTextPanel("Дракоши голодные");
+            _cardDistribution.DistributionCardDragons();
+        }
+        
         _countRound++;
+        SetTextPanel("Level " + _countRound);
         var cardEnamyCount = _countRound > 7 ? 7 : _countRound;
 
         if (_countRound == 1)
