@@ -68,6 +68,17 @@ public class BattlService : MonoBehaviour
                     count--;
                 }
             }
+
+        }
+
+        if (_gameManager.enamyCardsInPlay.Count == 0)
+        {
+            _gameManager.LevelHandler();
+        }
+
+        if (_gameManager.playerCardsInPlay.Count == 0)
+        {
+            _gameManager.SetTextPanel("Тебя сожрали!\nХа-Ха-Ха\nЛузер!");
         }
     }
 }

@@ -1018,6 +1018,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerCardsInPlay: []
   enamyCardsInPlay: []
+  textCountDragon: {fileID: 443394766}
 --- !u!4 &856210219
 Transform:
   m_ObjectHideFlags: 0

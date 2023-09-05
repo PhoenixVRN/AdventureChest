@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -18,13 +20,17 @@ public class GameManager : MonoBehaviour
     public List<GameObject> playerCardsInPlay;
     public List<GameObject> enamyCardsInPlay;
 
+    public TMP_Text textCountDragon;
+    public TMP_Text infoPanelText;
+
     void Start()
     {
-       _cardDistribution = GetComponent<CardDistribution>();
-        _countRound = 1;
-        enamyCardsInPlay = new List<GameObject>(_cardDistribution.DistributionCard(7, false));
-        playerCardsInPlay = new List<GameObject>(_cardDistribution.DistributionCard(7, true));
-        ChekDragon();
+        _cardDistribution = GetComponent<CardDistribution>();
+        _countRound = 0;
+        countDragon = 0;
+        textCountDragon.text = countDragon.ToString();
+        LevelHandler();
+        // ChekDragon();
     }
 
     private void ChekDragon()
@@ -33,16 +39,71 @@ public class GameManager : MonoBehaviour
         {
             if (enamyCardsInPlay[i].GetComponent<CardInfoEnamy>().TypeСreature == TypeСreature.Dragon)
             {
-
                 var dragonCard = enamyCardsInPlay[i];
+                dragonCard.transform.SetAsLastSibling();
                 enamyCardsInPlay.RemoveAt(i);
-                dragonCard.transform.DOMove(GameReferance.DragonDang.transform.localPosition, 2f).OnComplete( () => Destroy(dragonCard));
+                var l = GameReferance.CanvasGame.transform.TransformPoint(dragonCard.transform.localPosition);
+                dragonCard.GetComponent<LayoutElement>().ignoreLayout = true;
+                // dragonCard.transform.SetParent(GameReferance.CanvasGame);
+                dragonCard.transform.localPosition = l;
+                dragonCard.transform.DOMove(GameReferance.DragonDang.transform.position, 1f).OnComplete(() => MoveDragon(dragonCard));
+                return;
             }
         }
+        if (countDragon > 2)
+        {
+            //TODO реалидация боя с драконами
+         
+            SetTextPanel("Дракоши голодные");
+            // infoPanelText.text = "Тебя сожрали!\nХа-Ха-Ха\nЛузер!";
+        }
+
+        if (enamyCardsInPlay.Count == 0 && countDragon < 3)
+        {
+            LevelHandler();
+        }
+    }
+
+    public void SetTextPanel(string text)
+    {
+        infoPanelText.gameObject.SetActive(true);
+        infoPanelText.text = text;
+    }
+
+    private void MoveDragon(GameObject dragonCard)
+    {
+        countDragon++;
+        textCountDragon.text = countDragon.ToString();
+        Destroy(dragonCard);
+        ChekDragon();
+    }
+
+    public void LevelHandler()
+    {
+        _countRound++;
+        var cardEnamyCount = _countRound > 7 ? 7 : _countRound;
+
+        if (_countRound == 1)
+        {
+            InitLevel(1, 7);
+        }
+        else
+        {
+            InitLevel(_countRound);
+        }
+    }
+
+    private void InitLevel(int countEnamyCard, int countPlayerCard = 0)
+    {
+        enamyCardsInPlay = new List<GameObject>(_cardDistribution.DistributionCard(countEnamyCard, false));
+        if (countPlayerCard > 0)
+        {
+            playerCardsInPlay = new List<GameObject>(_cardDistribution.DistributionCard(7, true));
+        }
+        Invoke("ChekDragon", 1f);
     }
     void Update()
     {
-        
     }
 }
 
