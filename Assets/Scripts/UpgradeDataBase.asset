@@ -25,6 +25,8 @@ MonoBehaviour:
       quantity: 3
     - whoIsHitting: 11
       quantity: 3
+    - whoIsHitting: 6
+      quantity: 10
   - whoBeats: 1
     whoIsHitting:
     - whoIsHitting: 7
@@ -37,6 +39,8 @@ MonoBehaviour:
       quantity: 1
     - whoIsHitting: 11
       quantity: 3
+    - whoIsHitting: 6
+      quantity: 1
   - whoBeats: 2
     whoIsHitting:
     - whoIsHitting: 7
@@ -48,6 +52,8 @@ MonoBehaviour:
     - whoIsHitting: 10
       quantity: 1
     - whoIsHitting: 11
+      quantity: 1
+    - whoIsHitting: 6
       quantity: 1
   - whoBeats: 3
     whoIsHitting:
@@ -61,6 +67,8 @@ MonoBehaviour:
       quantity: 1
     - whoIsHitting: 11
       quantity: 1
+    - whoIsHitting: 6
+      quantity: 1
   - whoBeats: 4
     whoIsHitting:
     - whoIsHitting: 7
@@ -72,4 +80,6 @@ MonoBehaviour:
     - whoIsHitting: 10
       quantity: 1
     - whoIsHitting: 11
+      quantity: 1
+    - whoIsHitting: 6
       quantity: 1

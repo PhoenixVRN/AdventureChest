@@ -228,6 +228,7 @@ MonoBehaviour:
   name: Goblin
   typeCard: 1
   "Type\u0421reature": 9
+  isBattle: 1
 --- !u!114 &-6176835502446131796
 MonoBehaviour:
   m_ObjectHideFlags: 0

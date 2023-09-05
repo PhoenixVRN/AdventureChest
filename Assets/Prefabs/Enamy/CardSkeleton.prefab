@@ -93,6 +93,7 @@ MonoBehaviour:
   name: Skeleton
   typeCard: 1
   "Type\u0421reature": 7
+  isBattle: 1
 --- !u!114 &1684509239809942363
 MonoBehaviour:
   m_ObjectHideFlags: 0

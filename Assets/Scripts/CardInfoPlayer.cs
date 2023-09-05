@@ -125,21 +125,12 @@ public class CardInfoPlayer : CardInfoBase, IPointerDownHandler, IPointerEnterHa
     public void OnEndDrag(PointerEventData eventData)
     {
         // Debug.Log($"OnEndDrag");
-        if (oldEnamy != null)
-        // { _gameManager.enamyCardsInPlay.Remove(oldEnamy);
-        //      Destroy(oldEnamy);
-        //    
-        //     // _gameManager.enamyCardsInPlay.Remove(oldEnamy);
-        //     // Destroy(oldEnamy);
-        //
-        //     _gameManager.playerCardsInPlay.Remove(gameObject);
-        //     Destroy(gameObject);
-            // Destroy(gameObject);
-              BattlService.Instance.Attake(this, oldEnamy.GetComponent<CardInfoEnamy>());
-        //}
-        // else
-        // {
-        //     // transform.position = _initialPos;
-        // }
+        if (oldEnamy != null && BattlService.Instance.CheckButtleEnamy())
+        {
+            BattlService.Instance.Attake(this, oldEnamy.GetComponent<CardInfoEnamy>());
+        }else if (oldEnamy != null)
+        {
+            Debug.Log($"Добыча");
+        }
     }
 }

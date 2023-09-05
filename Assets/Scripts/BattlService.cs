@@ -6,6 +6,7 @@ public class BattlService : MonoBehaviour
     [SerializeField] private UpgradeDataBase dataBase;
     private Hero[] heroData;
     private GameManager _gameManager;
+    private int batlleEnamy;
 
     public static BattlService Instance;
 
@@ -80,5 +81,17 @@ public class BattlService : MonoBehaviour
         {
             _gameManager.SetTextPanel("Тебя сожрали!\nХа-Ха-Ха\nЛузер!");
         }
+    }
+
+    public bool CheckButtleEnamy()
+    {
+        foreach (var cardEnamy in _gameManager.enamyCardsInPlay)
+        {
+            if (cardEnamy.GetComponent<CardInfoEnamy>().isBattle)
+            {
+                return true;
+            }
+        }
+        return false;
     }
 }

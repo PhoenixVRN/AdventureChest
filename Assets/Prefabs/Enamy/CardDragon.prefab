@@ -228,6 +228,7 @@ MonoBehaviour:
   name: Dragon
   typeCard: 1
   "Type\u0421reature": 6
+  isBattle: 1
 --- !u!114 &-7863640743559240661
 MonoBehaviour:
   m_ObjectHideFlags: 0

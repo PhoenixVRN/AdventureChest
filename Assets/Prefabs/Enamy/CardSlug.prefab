@@ -301,6 +301,7 @@ MonoBehaviour:
   name: Slug
   typeCard: 1
   "Type\u0421reature": 8
+  isBattle: 1
 --- !u!114 &-1406592322760219901
 MonoBehaviour:
   m_ObjectHideFlags: 0
