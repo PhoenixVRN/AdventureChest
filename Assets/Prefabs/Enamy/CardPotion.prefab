@@ -91,6 +91,7 @@ MonoBehaviour:
   image: {fileID: 21300000, guid: 0df4344c7563c9e49bc534862cc10dd2, type: 3}
   name: Potion
   typeCard: 1
+  "Type\u0421reature": 10
 --- !u!1 &5324365248687705210
 GameObject:
   m_ObjectHideFlags: 0

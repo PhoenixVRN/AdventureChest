@@ -226,6 +226,7 @@ MonoBehaviour:
   image: {fileID: 21300000, guid: 4654d142a15f1634493708657e259bcb, type: 3}
   name: Thief
   typeCard: 0
+  "Type\u0421reature": 1
 --- !u!1 &5306161136743839970
 GameObject:
   m_ObjectHideFlags: 0

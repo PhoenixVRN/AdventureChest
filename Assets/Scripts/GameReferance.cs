@@ -12,4 +12,7 @@ public static class GameReferance
     
     internal static Transform PlayerCardContainer => _playerCardContainer != null ? _playerCardContainer : _playerCardContainer = GameObject.FindObjectOfType<PlayerCardContainer>().transform;
     private static Transform _playerCardContainer;
+    
+    internal static Transform DragonDang => _dragonDang != null ? _dragonDang : _dragonDang = GameObject.FindObjectOfType<DragonDang>().transform;
+    private static Transform _dragonDang;
 }

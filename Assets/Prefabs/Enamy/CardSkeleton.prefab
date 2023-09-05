@@ -91,6 +91,7 @@ MonoBehaviour:
   image: {fileID: 21300000, guid: 5ce7cadfe4dd5c442a30ec05a39e28d5, type: 3}
   name: Skeleton
   typeCard: 1
+  "Type\u0421reature": 7
 --- !u!1 &6651785561219053961
 GameObject:
   m_ObjectHideFlags: 0

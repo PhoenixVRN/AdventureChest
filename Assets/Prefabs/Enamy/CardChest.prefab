@@ -299,3 +299,4 @@ MonoBehaviour:
   image: {fileID: 21300000, guid: def0ccb6bd6a70345a5e67a3c81639b6, type: 3}
   name: Chest
   typeCard: 1
+  "Type\u0421reature": 11

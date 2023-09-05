@@ -91,6 +91,7 @@ MonoBehaviour:
   image: {fileID: 21300000, guid: 0a0cb207de2e1b34cb742e39716ed772, type: 3}
   name: Mage
   typeCard: 0
+  "Type\u0421reature": 3
 --- !u!1 &2272567699275973334
 GameObject:
   m_ObjectHideFlags: 0

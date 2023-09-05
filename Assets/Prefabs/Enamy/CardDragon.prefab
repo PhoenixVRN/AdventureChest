@@ -226,6 +226,7 @@ MonoBehaviour:
   image: {fileID: 21300000, guid: 4ad988cfd00255944bebea80952f18e7, type: 3}
   name: Dragon
   typeCard: 1
+  "Type\u0421reature": 6
 --- !u!1 &4863678946826532508
 GameObject:
   m_ObjectHideFlags: 0

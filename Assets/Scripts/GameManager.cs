@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -12,6 +13,8 @@ public class GameManager : MonoBehaviour
     private int _countRound;
     private CardDistribution _cardDistribution;
 
+    private int CountDragon;
+
     public List<GameObject> playerCardsInPlay;
     public List<GameObject> enamyCardsInPlay;
 
@@ -19,11 +22,24 @@ public class GameManager : MonoBehaviour
     {
        _cardDistribution = GetComponent<CardDistribution>();
         _countRound = 1;
-        playerCardsInPlay = _cardDistribution.DistributionCard(7, true);
-        enamyCardsInPlay = _cardDistribution.DistributionCard(1, false);
+        enamyCardsInPlay = new List<GameObject>(_cardDistribution.DistributionCard(7, false));
+        playerCardsInPlay = new List<GameObject>(_cardDistribution.DistributionCard(7, true));
+        ChekDragon();
     }
 
-   
+    private void ChekDragon()
+    {
+        for (int i = enamyCardsInPlay.Count - 1; i > -1; i--)
+        {
+            if (enamyCardsInPlay[i].GetComponent<CardInfoEnamy>().TypeСreature == TypeСreature.Dragon)
+            {
+
+                var dragonCard = enamyCardsInPlay[i];
+                enamyCardsInPlay.RemoveAt(i);
+                dragonCard.transform.DOMove(GameReferance.DragonDang.transform.localPosition, 2f).OnComplete( () => Destroy(dragonCard));
+            }
+        }
+    }
     void Update()
     {
         

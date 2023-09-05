@@ -226,6 +226,7 @@ MonoBehaviour:
   image: {fileID: 21300000, guid: 8e7231d49e04db84f887e2dcd790ce4f, type: 3}
   name: Goblin
   typeCard: 1
+  "Type\u0421reature": 9
 --- !u!1 &8985897742926532669
 GameObject:
   m_ObjectHideFlags: 0

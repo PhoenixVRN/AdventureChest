@@ -164,6 +164,7 @@ MonoBehaviour:
   image: {fileID: 21300000, guid: 553db5763e2ed4541ac720741f0d555c, type: 3}
   name: Warrior
   typeCard: 0
+  "Type\u0421reature": 4
 --- !u!1 &4123897270754026398
 GameObject:
   m_ObjectHideFlags: 0
