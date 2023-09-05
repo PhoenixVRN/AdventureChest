@@ -16,8 +16,10 @@ public class CardInfoPlayer : CardInfoBase, IPointerDownHandler, IPointerEnterHa
     private int _siblingIndex;
     private GameObject oldEnamy;
 
+    private GameManager _gameManager;
     void Start()
     {
+        _gameManager = FindObjectOfType<GameManager>();
     }
 
 
@@ -86,7 +88,7 @@ public class CardInfoPlayer : CardInfoBase, IPointerDownHandler, IPointerEnterHa
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        Debug.Log($"OnPointerDown");
+        // Debug.Log($"OnPointerDown");
         _siblingIndex = transform.GetSiblingIndex();
         transform.SetParent(GameReferance.CanvasGame);
         transform.DOShakeScale(0.1f, new Vector3(0.4f, 0.3f, 0f), 0, 0f, false);
@@ -94,7 +96,7 @@ public class CardInfoPlayer : CardInfoBase, IPointerDownHandler, IPointerEnterHa
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        Debug.Log($"OnPointerEnter");
+        // Debug.Log($"OnPointerEnter");
     }
 
     public void OnPointerExit(PointerEventData eventData)
@@ -102,7 +104,7 @@ public class CardInfoPlayer : CardInfoBase, IPointerDownHandler, IPointerEnterHa
         var j = typeCard == TypeCard.Player ? GameReferance.PlayerCardContainer : GameReferance.EnamyCardContainer;
         transform.SetParent(j);
         transform.SetSiblingIndex(_siblingIndex);
-        Debug.Log($"OnPointerExit");
+        // Debug.Log($"OnPointerExit");
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -122,14 +124,13 @@ public class CardInfoPlayer : CardInfoBase, IPointerDownHandler, IPointerEnterHa
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        Debug.Log($"OnEndDrag");
-        if (oldEnamy != null)
+        // Debug.Log($"OnEndDrag");
+        if (oldEnamy != null && BattlService.Instance.CheckButtleEnamy())
         {
-            // BattlService.Battle(this, oldEnamy.GetComponent<>());
-        }
-        else
+            BattlService.Instance.Attake(this, oldEnamy.GetComponent<CardInfoEnamy>());
+        }else if (oldEnamy != null)
         {
-            transform.position = _initialPos;
+            Debug.Log($"Добыча");
         }
     }
 }

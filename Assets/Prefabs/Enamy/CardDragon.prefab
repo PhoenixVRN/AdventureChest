@@ -147,6 +147,7 @@ GameObject:
   - component: {fileID: 7826900364684612578}
   - component: {fileID: 6784807316324663937}
   - component: {fileID: 6074611769435830715}
+  - component: {fileID: -7863640743559240661}
   m_Layer: 5
   m_Name: CardDragon
   m_TagString: Untagged
@@ -226,6 +227,28 @@ MonoBehaviour:
   image: {fileID: 21300000, guid: 4ad988cfd00255944bebea80952f18e7, type: 3}
   name: Dragon
   typeCard: 1
+  "Type\u0421reature": 6
+  isBattle: 1
+--- !u!114 &-7863640743559240661
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3851566038741543775}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 306cc8c2b49d7114eaa3623786fc2126, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreLayout: 0
+  m_MinWidth: -1
+  m_MinHeight: -1
+  m_PreferredWidth: -1
+  m_PreferredHeight: -1
+  m_FlexibleWidth: -1
+  m_FlexibleHeight: -1
+  m_LayoutPriority: 1
 --- !u!1 &4863678946826532508
 GameObject:
   m_ObjectHideFlags: 0

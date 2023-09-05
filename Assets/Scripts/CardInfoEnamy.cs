@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class CardInfoEnamy : CardInfoBase
 {
-  
+  public bool isBattle;
 }
