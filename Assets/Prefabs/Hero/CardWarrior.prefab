@@ -165,6 +165,7 @@ MonoBehaviour:
   name: Warrior
   typeCard: 0
   "Type\u0421reature": 4
+  IsBattle: 1
 --- !u!1 &4123897270754026398
 GameObject:
   m_ObjectHideFlags: 0

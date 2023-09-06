@@ -227,6 +227,7 @@ MonoBehaviour:
   name: Thief
   typeCard: 0
   "Type\u0421reature": 1
+  IsBattle: 1
 --- !u!1 &5306161136743839970
 GameObject:
   m_ObjectHideFlags: 0

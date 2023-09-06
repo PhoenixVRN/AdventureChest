@@ -91,6 +91,8 @@ MonoBehaviour:
   image: {fileID: 21300000, guid: b2f950e2d3af0cf4b8ed9ca490098007, type: 3}
   name: Paladin
   typeCard: 0
+  "Type\u0421reature": 0
+  IsBattle: 1
 --- !u!1 &4497156499625454571
 GameObject:
   m_ObjectHideFlags: 0

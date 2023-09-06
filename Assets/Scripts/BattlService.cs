@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class BattlService : MonoBehaviour
@@ -7,6 +8,8 @@ public class BattlService : MonoBehaviour
     private Hero[] heroData;
     private GameManager _gameManager;
     private int batlleEnamy;
+
+    private List<TypeСreature> battleDragons;
 
     public static BattlService Instance;
 
@@ -22,13 +25,63 @@ public class BattlService : MonoBehaviour
         }
 
         DontDestroyOnLoad(gameObject);
-
+        battleDragons = new List<TypeСreature>();
         _gameManager = GetComponent<GameManager>();
         heroData = dataBase.GetUpgrade();
     }
 
     public void Attake(CardInfoPlayer player, CardInfoEnamy enamy)
     {
+        if (GameReferance.isBattleDragon)
+        {
+            var war = false;
+            if (player.TypeСreature != TypeСreature.Scroll)
+            {
+                foreach (var typeHero in battleDragons)
+                {
+                    if (player.TypeСreature != typeHero)
+                    {
+                        battleDragons.Add(player.TypeСreature);
+                        _gameManager.enamyCardsInPlay.Remove(enamy.gameObject);
+                        Destroy(enamy);
+                        _gameManager.playerCardsInPlay.Remove(player.gameObject);
+                        Destroy(player);
+                        if (_gameManager.enamyCardsInPlay.Count == 0)
+                        {
+                            _gameManager.SetTextPanel("Ебать ты крут!");
+                            battleDragons.Clear();
+                        }
+                        else
+                        {
+                            foreach (var hero in _gameManager.playerCardsInPlay)
+                            {
+                                if (hero.GetComponent<CardInfoPlayer>().IsBattle)
+                                {
+                                    war = true;
+                                }
+                            }
+
+                            if (!war)
+                            {
+                                _gameManager.SetTextPanel("Ты Сдох!!!");
+                                battleDragons.Clear();
+                            }
+                        }
+                        return;
+                    }
+                    else
+                    {
+                        _gameManager.SetTextPanel("Разные герои\nнужны");
+                        return;
+                    }
+                }
+            }
+            else
+            {
+                _gameManager.SetTextPanel("Ты дуркак\nсвитком бить!");
+                return;
+            }
+        }
         if (!enamy.isBattle && !CheckButtleEnamy())
         {
             //TODO реализовать механику Добычи
@@ -62,13 +115,12 @@ public class BattlService : MonoBehaviour
     private void Battle(CardInfoPlayer player, CardInfoEnamy enamy, int count)
     {
         var type = enamy.TypeСreature;
-        //TODO пернос на кладбище героя
 
         _gameManager.playerCardsInPlay.Remove(player.gameObject);
+        _gameManager.cemetery++;
         Destroy(player.gameObject);
 
         _gameManager.enamyCardsInPlay.Remove(enamy.gameObject);
-        _gameManager.cemetery++;
         Destroy(enamy.gameObject);
         count--;
         if (count > 0)

@@ -300,3 +300,4 @@ MonoBehaviour:
   name: Priest
   typeCard: 0
   "Type\u0421reature": 2
+  IsBattle: 1

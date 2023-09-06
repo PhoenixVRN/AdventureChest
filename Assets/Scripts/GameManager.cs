@@ -24,7 +24,6 @@ public class GameManager : MonoBehaviour
 
     public List<GameObject> playerCardsInPlay;
     public List<GameObject> enamyCardsInPlay;
-    public List<GameObject> dragonsCardsInPlay;
 
     public TMP_Text textCountDragon;
     public TMP_Text infoPanelText;
@@ -73,12 +72,10 @@ public class GameManager : MonoBehaviour
             {
                 var dragonCard = enamyCardsInPlay[i];
                 dragonCard.transform.SetAsLastSibling();
-                dragonsCardsInPlay.Add(enamyCardsInPlay[i]);
                 enamyCardsInPlay.RemoveAt(i);
-                var l = GameReferance.CanvasGame.transform.TransformPoint(dragonCard.transform.localPosition);
+                var pos = GameReferance.CanvasGame.transform.TransformPoint(dragonCard.transform.localPosition);
                 dragonCard.GetComponent<LayoutElement>().ignoreLayout = true;
-                // dragonCard.transform.SetParent(GameReferance.CanvasGame);
-                dragonCard.transform.localPosition = l;
+                dragonCard.transform.localPosition = pos;
                 dragonCard.transform.DOMove(GameReferance.DragonDang.transform.position, 1f).OnComplete(() => MoveDragon(dragonCard));
                 return;
             }
@@ -137,7 +134,7 @@ public class GameManager : MonoBehaviour
     {
         countDragon++;
         textCountDragon.text = countDragon.ToString();
-        dragonCard.SetActive(false);
+        Destroy(dragonCard);
         ChekDragon();
     }
 
@@ -150,6 +147,7 @@ public class GameManager : MonoBehaviour
             //TODO реалидация боя с драконами
             SetTextPanel("Дракоши голодные");
             _cardDistribution.DistributionCardDragons();
+            GameReferance.isBattleDragon = true;
             //TODO бой на драконах
             return;
         }

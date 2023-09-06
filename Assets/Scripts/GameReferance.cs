@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public static class GameReferance
 {
     public static bool isReroll;
+    public static bool isBattleDragon;
     internal static Transform CanvasGame => _canvasGame != null ? _canvasGame : _canvasGame = GameObject.FindObjectOfType<CanvasGame>().transform;
     private static Transform _canvasGame;
     

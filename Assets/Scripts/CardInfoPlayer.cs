@@ -16,6 +16,8 @@ public class CardInfoPlayer : CardInfoBase, IPointerDownHandler, IPointerEnterHa
     private int _siblingIndex;
     private GameObject oldEnamy;
 
+    public bool IsBattle;
+
     protected  GameManager _gameManager;
     void Start()
     {

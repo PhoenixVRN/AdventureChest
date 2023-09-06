@@ -62,22 +62,11 @@ public class CardDistribution : MonoBehaviour
                 _gameManager.enamyCardsInPlay.RemoveAt(i);
                 Destroy(obj);
             }
-            //
-            // for (int i = 0; i < _gameManager.countDragon; i++)
-            // {
-            //     var cardDragon = Instantiate(dragon, containerEnamy.transform);
-            //     _gameManager.enamyCardsInPlay.Add(cardDragon);
-            // }
         }
 
-        for (int i = _gameManager.dragonsCardsInPlay.Count - 1; i > -1; i--)
+        for (int i = 0; i < 3; i++)
         {
-            var dragon = _gameManager.dragonsCardsInPlay[i];
-            dragon.SetActive(true);
-            dragon.GetComponent<LayoutElement>().ignoreLayout = false;
-            _gameManager.dragonsCardsInPlay.Remove(dragon);
-            _gameManager.enamyCardsInPlay.Add(dragon);
-            dragon.transform.SetParent(containerEnamy.transform);
+            _gameManager.enamyCardsInPlay.Add(Instantiate(dragon, containerEnamy.transform));
         }
     }
 }
