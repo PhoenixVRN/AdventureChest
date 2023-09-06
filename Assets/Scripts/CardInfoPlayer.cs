@@ -16,7 +16,7 @@ public class CardInfoPlayer : CardInfoBase, IPointerDownHandler, IPointerEnterHa
     private int _siblingIndex;
     private GameObject oldEnamy;
 
-    private GameManager _gameManager;
+    protected  GameManager _gameManager;
     void Start()
     {
         _gameManager = FindObjectOfType<GameManager>();
@@ -86,29 +86,37 @@ public class CardInfoPlayer : CardInfoBase, IPointerDownHandler, IPointerEnterHa
         }
     }
 
-    public void OnPointerDown(PointerEventData eventData)
+    public virtual void OnPointerDown(PointerEventData eventData)
     {
         // Debug.Log($"OnPointerDown");
+        if (GameReferance.isReroll)
+        {
+            _gameManager.rerolPlayer++;
+            _gameManager.playerCardsInPlay.Remove(gameObject);
+            Destroy(gameObject);
+        }
         _siblingIndex = transform.GetSiblingIndex();
         transform.SetParent(GameReferance.CanvasGame);
         transform.DOShakeScale(0.1f, new Vector3(0.4f, 0.3f, 0f), 0, 0f, false);
     }
 
-    public void OnPointerEnter(PointerEventData eventData)
+    public virtual void OnPointerEnter(PointerEventData eventData)
     {
         // Debug.Log($"OnPointerEnter");
     }
 
-    public void OnPointerExit(PointerEventData eventData)
+    public virtual void OnPointerExit(PointerEventData eventData)
     {
+        if (GameReferance.isReroll) return;
         var j = typeCard == TypeCard.Player ? GameReferance.PlayerCardContainer : GameReferance.EnamyCardContainer;
         transform.SetParent(j);
         transform.SetSiblingIndex(_siblingIndex);
         // Debug.Log($"OnPointerExit");
     }
 
-    public void OnDrag(PointerEventData eventData)
+   public virtual void OnDrag(PointerEventData eventData)
     {
+        if (GameReferance.isReroll) return;
         // transform.position = Input.mousePosition;
         // var t = eventData.position;
         // transform.localPosition= t;
@@ -116,14 +124,16 @@ public class CardInfoPlayer : CardInfoBase, IPointerDownHandler, IPointerEnterHa
         DetectEnamy();
     }
 
-    public void OnBeginDrag(PointerEventData eventData)
+    public virtual void OnBeginDrag(PointerEventData eventData)
     {
+        if (GameReferance.isReroll) return;
         lastMousePosition = eventData.position;
         _initialPos = transform.position;
     }
 
-    public void OnEndDrag(PointerEventData eventData)
+    public  virtual void OnEndDrag(PointerEventData eventData)
     {
+        if (GameReferance.isReroll) return;
         // Debug.Log($"OnEndDrag");
         if (oldEnamy != null && BattlService.Instance.CheckButtleEnamy())
         {

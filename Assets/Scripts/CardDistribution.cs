@@ -33,6 +33,22 @@ public class CardDistribution : MonoBehaviour
         return DistributionCard;
     }
 
+    public void DistributionReRoll(int player, int enamy)
+    {
+        for (int i = 0; i < player; i++)
+        {
+            var card = Instantiate(AllHeroCard[Random.Range(0, AllHeroCard.Count)], containerHero.transform);
+            _gameManager.playerCardsInPlay.Add(card);
+        }
+        for (int i = 0; i < enamy; i++)
+        {
+            var card = Instantiate(AllEmamyCard[Random.Range(0, AllEmamyCard.Count)], containerEnamy.transform);
+            _gameManager.enamyCardsInPlay.Add(card);
+        }
+
+        _gameManager.ChekDragon();
+    }
+
     public void DistributionCardDragons()
     {
         if (_gameManager.enamyCardsInPlay.Count > 0)

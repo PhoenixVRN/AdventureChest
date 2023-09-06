@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public static class GameReferance 
+public static class GameReferance
 {
+    public static bool isReroll;
     internal static Transform CanvasGame => _canvasGame != null ? _canvasGame : _canvasGame = GameObject.FindObjectOfType<CanvasGame>().transform;
     private static Transform _canvasGame;
     
@@ -15,6 +16,9 @@ public static class GameReferance
     
     internal static Transform DragonDang => _dragonDang != null ? _dragonDang : _dragonDang = GameObject.FindObjectOfType<DragonDang>().transform;
     private static Transform _dragonDang;
+    
+    internal static Transform GameManager => _gamemanager != null ? _gamemanager : _gamemanager = GameObject.FindObjectOfType<GameManager>().transform;
+    private static Transform _gamemanager;
     
     internal static Transform Cemetery => _сemetery != null ? _сemetery : _сemetery = GameObject.FindObjectOfType<Cemetery>().transform;
     private static Transform _сemetery;

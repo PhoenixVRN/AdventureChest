@@ -31,6 +31,10 @@ public class GameManager : MonoBehaviour
 
     public Button buttonEndTurn;
     public Button buttonBackTavern;
+    public Button buttonReRoll;
+
+    public int rerollEnamy;
+    public int rerolPlayer;
 
     void Start()
     {
@@ -46,17 +50,20 @@ public class GameManager : MonoBehaviour
     {
         buttonEndTurn.gameObject.SetActive(false);
         buttonBackTavern.gameObject.SetActive(false);
+        buttonReRoll.gameObject.SetActive(false);
         buttonEndTurn.onClick.AddListener(EndTurn);
         buttonBackTavern.onClick.AddListener(BackToTavern);
+        buttonReRoll.onClick.AddListener(ScrolReRoll);
     }
 
     private void OnDisable()
     {
         buttonEndTurn.onClick.RemoveListener(EndTurn);
         buttonBackTavern.onClick.RemoveListener(BackToTavern);
+        buttonReRoll.onClick.AddListener(ScrolReRoll);
     }
 
-    private void ChekDragon()
+    public void ChekDragon()
     {
         ActiveButtonEndTurn();
         
@@ -177,8 +184,22 @@ public class GameManager : MonoBehaviour
                 Destroy(card);
         }
     }
-    void Update()
+
+    public void PotionUse()
     {
+        if (cemetery == 0)
+        {
+            Debug.Log($"на кладбиже нету нихуя");
+            SetTextPanel("На каладбище\nветер свищет!");
+            return;
+        }
+    }
+
+    public void ScrolReRoll()
+    {
+        GameReferance.isReroll = false;
+        _cardDistribution.DistributionReRoll(rerolPlayer, rerollEnamy);
+        buttonReRoll.gameObject.SetActive(false);
     }
 }
 
