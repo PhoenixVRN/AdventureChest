@@ -14,13 +14,13 @@ public class GameManager : MonoBehaviour
     
     private List<GameObject> _treasures;
     private GameObject _hero;
-    private int countDragon;
+    public int countDragon;
     private int _countRound;
     private CardDistribution _cardDistribution;
 
     public int cemetery = 0;
 
-    private int CountDragon;
+    
 
     public List<GameObject> playerCardsInPlay;
     public List<GameObject> enamyCardsInPlay;
@@ -145,9 +145,13 @@ public class GameManager : MonoBehaviour
     {
         if (countDragon > 2)
         {
+            buttonBackTavern.gameObject.SetActive(false);
+            buttonEndTurn.gameObject.SetActive(false);
             //TODO реалидация боя с драконами
             SetTextPanel("Дракоши голодные");
             _cardDistribution.DistributionCardDragons();
+            //TODO бой на драконах
+            return;
         }
         
         _countRound++;
@@ -160,7 +164,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            InitLevel(_countRound);
+            InitLevel(cardEnamyCount);
         }
     }
 

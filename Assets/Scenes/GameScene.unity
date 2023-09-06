@@ -1409,6 +1409,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cemetery: 0
+  CountDragon: 0
   playerCardsInPlay: []
   enamyCardsInPlay: []
   dragonsCardsInPlay: []
@@ -1460,6 +1461,7 @@ MonoBehaviour:
   - {fileID: 2075061158967160854, guid: 1201d87ad3b1e664aaeb08b4f7f4865f, type: 3}
   - {fileID: 3941966101346648736, guid: 5d6ec0790bd1b794ea927e3eb5e7aaf9, type: 3}
   - {fileID: 7753151665161924560, guid: 459ffc974a74dc243983af9f9f91a55d, type: 3}
+  dragon: {fileID: 3851566038741543775, guid: dd92422148a61994dbf0abd24070c9e8, type: 3}
   containerHero: {fileID: 1488972451}
   containerEnamy: {fileID: 1089928729}
 --- !u!114 &856210221

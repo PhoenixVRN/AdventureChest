@@ -2,12 +2,15 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 public class CardDistribution : MonoBehaviour
 {
     public List<GameObject> AllHeroCard;
     public List<GameObject> AllEmamyCard;
+
+    public GameObject dragon;
 
     public GameObject containerHero;
     public GameObject containerEnamy;
@@ -59,11 +62,20 @@ public class CardDistribution : MonoBehaviour
                 _gameManager.enamyCardsInPlay.RemoveAt(i);
                 Destroy(obj);
             }
+            //
+            // for (int i = 0; i < _gameManager.countDragon; i++)
+            // {
+            //     var cardDragon = Instantiate(dragon, containerEnamy.transform);
+            //     _gameManager.enamyCardsInPlay.Add(cardDragon);
+            // }
         }
 
-        foreach (var dragon in _gameManager.dragonsCardsInPlay)
+        for (int i = _gameManager.dragonsCardsInPlay.Count - 1; i > -1; i--)
         {
+            var dragon = _gameManager.dragonsCardsInPlay[i];
             dragon.SetActive(true);
+            dragon.GetComponent<LayoutElement>().ignoreLayout = false;
+            _gameManager.dragonsCardsInPlay.Remove(dragon);
             _gameManager.enamyCardsInPlay.Add(dragon);
             dragon.transform.SetParent(containerEnamy.transform);
         }
