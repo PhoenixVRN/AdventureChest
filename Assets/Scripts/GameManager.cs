@@ -1,8 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
@@ -16,6 +18,8 @@ public class GameManager : MonoBehaviour
     private int _countRound;
     private CardDistribution _cardDistribution;
 
+    public int cemetery = 0;
+
     private int CountDragon;
 
     public List<GameObject> playerCardsInPlay;
@@ -24,6 +28,13 @@ public class GameManager : MonoBehaviour
 
     public TMP_Text textCountDragon;
     public TMP_Text infoPanelText;
+
+    public Button buttonEndTurn;
+    public Button buttonBackTavern;
+    public Button buttonReRoll;
+
+    public int rerollEnamy;
+    public int rerolPlayer;
 
     void Start()
     {
@@ -35,8 +46,27 @@ public class GameManager : MonoBehaviour
         // ChekDragon();
     }
 
-    private void ChekDragon()
+    private void OnEnable()
     {
+        buttonEndTurn.gameObject.SetActive(false);
+        buttonBackTavern.gameObject.SetActive(false);
+        buttonReRoll.gameObject.SetActive(false);
+        buttonEndTurn.onClick.AddListener(EndTurn);
+        buttonBackTavern.onClick.AddListener(BackToTavern);
+        buttonReRoll.onClick.AddListener(ScrolReRoll);
+    }
+
+    private void OnDisable()
+    {
+        buttonEndTurn.onClick.RemoveListener(EndTurn);
+        buttonBackTavern.onClick.RemoveListener(BackToTavern);
+        buttonReRoll.onClick.AddListener(ScrolReRoll);
+    }
+
+    public void ChekDragon()
+    {
+        ActiveButtonEndTurn();
+        
         for (int i = enamyCardsInPlay.Count - 1; i > -1; i--)
         {
             if (enamyCardsInPlay[i].GetComponent<CardInfoEnamy>().TypeСreature == TypeСreature.Dragon)
@@ -59,6 +89,36 @@ public class GameManager : MonoBehaviour
         {
             LevelHandler();
         }
+    }
+
+    public void ActiveButtonEndTurn()
+    {
+        if (!BattlService.Instance.CheckButtleEnamy())
+        {
+            buttonEndTurn.gameObject.SetActive(true);
+            buttonBackTavern.gameObject.SetActive(true);
+        }
+        else
+        {
+            buttonEndTurn.gameObject.SetActive(false);
+            buttonBackTavern.gameObject.SetActive(false);
+        }
+    }
+    private void EndTurn()
+    {
+        ClearEnamyHands();
+        LevelHandler();
+        buttonEndTurn.gameObject.SetActive(false);
+        buttonBackTavern.gameObject.SetActive(false);
+    }
+
+    public void ActiveButtonBackTavern()
+    {
+        buttonBackTavern.gameObject.SetActive(true);
+    }
+    private void BackToTavern()
+    {
+        //TODO вернутся в наверну и начислить коньячку
     }
 
     public void SetTextPanel(string text)
@@ -113,8 +173,33 @@ public class GameManager : MonoBehaviour
         }
         Invoke("ChekDragon", 1f);
     }
-    void Update()
+
+    public void ClearEnamyHands()
     {
+        if (enamyCardsInPlay.Count == 0 ) return;
+        for (int i = enamyCardsInPlay.Count - 1; i > -1; i--)
+        {
+            var card = enamyCardsInPlay[i];
+                enamyCardsInPlay.RemoveAt(i);
+                Destroy(card);
+        }
+    }
+
+    public void PotionUse()
+    {
+        if (cemetery == 0)
+        {
+            Debug.Log($"на кладбиже нету нихуя");
+            SetTextPanel("На каладбище\nветер свищет!");
+            return;
+        }
+    }
+
+    public void ScrolReRoll()
+    {
+        GameReferance.isReroll = false;
+        _cardDistribution.DistributionReRoll(rerolPlayer, rerollEnamy);
+        buttonReRoll.gameObject.SetActive(false);
     }
 }
 

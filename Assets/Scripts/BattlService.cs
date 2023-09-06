@@ -29,6 +29,19 @@ public class BattlService : MonoBehaviour
 
     public void Attake(CardInfoPlayer player, CardInfoEnamy enamy)
     {
+        if (!enamy.isBattle && !CheckButtleEnamy())
+        {
+            //TODO реализовать механику Добычи
+            _gameManager.SetTextPanel("Добыча");
+            return;
+        }
+
+        if (!enamy.isBattle)
+        {
+            _gameManager.SetTextPanel("Убете всех монстров");
+            return;
+        }
+
         foreach (var hero in heroData)
         {
             if (hero.whoBeats == player.TypeСreature)
@@ -50,11 +63,12 @@ public class BattlService : MonoBehaviour
     {
         var type = enamy.TypeСreature;
         //TODO пернос на кладбище героя
-      
+
         _gameManager.playerCardsInPlay.Remove(player.gameObject);
         Destroy(player.gameObject);
 
         _gameManager.enamyCardsInPlay.Remove(enamy.gameObject);
+        _gameManager.cemetery++;
         Destroy(enamy.gameObject);
         count--;
         if (count > 0)
@@ -69,16 +83,22 @@ public class BattlService : MonoBehaviour
                     count--;
                 }
             }
-
         }
 
         if (_gameManager.enamyCardsInPlay.Count == 0)
         {
-            _gameManager.LevelHandler();
+            // _gameManager.LevelHandler();
+            _gameManager.ActiveButtonBackTavern();
+            _gameManager.ActiveButtonEndTurn();
+        }
+        else
+        {
+            _gameManager.ActiveButtonEndTurn();
         }
 
-        if (_gameManager.playerCardsInPlay.Count == 0)
+        if (_gameManager.playerCardsInPlay.Count == 0 &&  CheckButtleEnamy())
         {
+            //TODO реализовать проигрышь
             _gameManager.SetTextPanel("Тебя сожрали!\nХа-Ха-Ха\nЛузер!");
         }
     }
@@ -92,6 +112,7 @@ public class BattlService : MonoBehaviour
                 return true;
             }
         }
+
         return false;
     }
 }
