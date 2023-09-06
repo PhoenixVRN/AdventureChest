@@ -128,7 +128,8 @@ public class CardInfoPlayer : CardInfoBase, IPointerDownHandler, IPointerEnterHa
         if (oldEnamy != null && BattlService.Instance.CheckButtleEnamy())
         {
             BattlService.Instance.Attake(this, oldEnamy.GetComponent<CardInfoEnamy>());
-        }else if (oldEnamy != null)
+        }
+        else if (oldEnamy != null)
         {
             Debug.Log($"Добыча");
         }
