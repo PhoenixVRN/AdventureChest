@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
     private CardDistribution _cardDistribution;
 
     public int cemetery = 0;
+    public int resurrection;
 
     
 

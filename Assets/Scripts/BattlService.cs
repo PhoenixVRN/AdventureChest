@@ -9,9 +9,12 @@ public class BattlService : MonoBehaviour
     private GameManager _gameManager;
     private int batlleEnamy;
 
-    private List<TypeСreature> battleDragons;
+    private List<TypeСreature> threeHeroes;
 
     public static BattlService Instance;
+
+    private CardInfoPlayer player;
+    private CardInfoEnamy enamy;
 
     private void Start()
     {
@@ -25,67 +28,26 @@ public class BattlService : MonoBehaviour
         }
 
         DontDestroyOnLoad(gameObject);
-        battleDragons = new List<TypeСreature>();
+        threeHeroes = new List<TypeСreature>();
         _gameManager = GetComponent<GameManager>();
         heroData = dataBase.GetUpgrade();
     }
 
     public void Attake(CardInfoPlayer player, CardInfoEnamy enamy)
     {
+        this.player = player;
+        this.enamy = enamy;
+            
         if (GameReferance.isBattleDragon)
         {
-            var war = false;
-            if (player.TypeСreature != TypeСreature.Scroll)
-            {
-                foreach (var typeHero in battleDragons)
-                {
-                    if (player.TypeСreature != typeHero)
-                    {
-                        battleDragons.Add(player.TypeСreature);
-                        _gameManager.enamyCardsInPlay.Remove(enamy.gameObject);
-                        Destroy(enamy);
-                        _gameManager.playerCardsInPlay.Remove(player.gameObject);
-                        Destroy(player);
-                        if (_gameManager.enamyCardsInPlay.Count == 0)
-                        {
-                            _gameManager.SetTextPanel("Ебать ты крут!");
-                            battleDragons.Clear();
-                        }
-                        else
-                        {
-                            foreach (var hero in _gameManager.playerCardsInPlay)
-                            {
-                                if (hero.GetComponent<CardInfoPlayer>().IsBattle)
-                                {
-                                    war = true;
-                                }
-                            }
-
-                            if (!war)
-                            {
-                                _gameManager.SetTextPanel("Ты Сдох!!!");
-                                battleDragons.Clear();
-                            }
-                        }
-                        return;
-                    }
-                    else
-                    {
-                        _gameManager.SetTextPanel("Разные герои\nнужны");
-                        return;
-                    }
-                }
-            }
-            else
-            {
-                _gameManager.SetTextPanel("Ты дуркак\nсвитком бить!");
-                return;
-            }
+           FightDragon();
         }
+        
         if (!enamy.isBattle && !CheckButtleEnamy())
         {
             //TODO реализовать механику Добычи
             _gameManager.SetTextPanel("Добыча");
+            Reward();
             return;
         }
 
@@ -112,6 +74,93 @@ public class BattlService : MonoBehaviour
         }
     }
 
+    private void Reward()
+    {
+        _gameManager.resurrection = 0;
+        if (enamy.TypeСreature == TypeСreature.Potion)
+        {
+            _gameManager.playerCardsInPlay.Remove(player.gameObject);
+            _gameManager.cemetery++;
+            Destroy(player.gameObject);
+
+            
+            _gameManager.enamyCardsInPlay.Remove(enamy.gameObject);
+            Destroy(enamy.gameObject);
+            
+            for (int i = _gameManager.enamyCardsInPlay.Count - 1; i > -1; i--)
+            {
+                if (_gameManager.enamyCardsInPlay[i].GetComponent<CardInfoEnamy>().TypeСreature == TypeСreature.Potion )
+                {
+                    var card = _gameManager.enamyCardsInPlay[i];
+                    _gameManager.enamyCardsInPlay.RemoveAt(i);
+                    Destroy(card);
+                    _gameManager.resurrection++;
+                }
+            }
+            ResurrectionHero();
+        }
+        else
+        {
+            //TODO chest
+        }
+    }
+
+    private void ResurrectionHero()
+    {
+        
+    }
+    
+    private void FightDragon()
+    {
+        var war = false;
+        if (player.TypeСreature != TypeСreature.Scroll)
+        {
+            foreach (var typeHero in threeHeroes)
+            {
+                if (player.TypeСreature != typeHero)
+                {
+                    threeHeroes.Add(player.TypeСreature);
+                    _gameManager.enamyCardsInPlay.Remove(enamy.gameObject);
+                    Destroy(enamy);
+                    _gameManager.playerCardsInPlay.Remove(player.gameObject);
+                    Destroy(player);
+                    if (!CheckButtleEnamy())
+                    {
+                        _gameManager.SetTextPanel("Ебать ты крут!");
+                        _gameManager.ActiveButtonEndTurn();
+                        threeHeroes.Clear();
+                    }
+                    else
+                    {
+                        foreach (var hero in _gameManager.playerCardsInPlay)
+                        {
+                            if (hero.GetComponent<CardInfoPlayer>().IsBattle)
+                            {
+                                war = true;
+                            }
+                        }
+
+                        if (!war)
+                        {
+                            _gameManager.SetTextPanel("Ты Сдох!!!");
+                            threeHeroes.Clear();
+                        }
+                    }
+                    return;
+                }
+                else
+                {
+                    _gameManager.SetTextPanel("Разные герои\nнужны");
+                    return;
+                }
+            }
+        }
+        else
+        {
+            _gameManager.SetTextPanel("Ты дуркак\nсвитком бить!");
+            return;
+        }
+    }
     private void Battle(CardInfoPlayer player, CardInfoEnamy enamy, int count)
     {
         var type = enamy.TypeСreature;
@@ -161,10 +210,11 @@ public class BattlService : MonoBehaviour
         {
             if (cardEnamy.GetComponent<CardInfoEnamy>().isBattle)
             {
+                GameReferance.stateReaward = true;
                 return true;
             }
         }
-
+        GameReferance.stateReaward = false;
         return false;
     }
 }

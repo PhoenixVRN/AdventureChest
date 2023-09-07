@@ -9,7 +9,7 @@ public class ScrollCard : CardInfoPlayer, IPointerDownHandler, IPointerEnterHand
         if (GameReferance.isReroll)
         {
             // transform.DOScale(new Vector3(1.2f, 1.2f, 1.2f), 1f);
-            _gameManager.enamyCardsInPlay.Remove(gameObject);
+            _gameManager.playerCardsInPlay.Remove(gameObject);
             _gameManager.rerolPlayer++;
             Destroy(gameObject);
         }
@@ -29,8 +29,7 @@ public class ScrollCard : CardInfoPlayer, IPointerDownHandler, IPointerEnterHand
         _gameManager.cemetery++;
         GameReferance.isReroll = true;
         _gameManager.buttonReRoll.gameObject.SetActive(true);
-        _gameManager.enamyCardsInPlay.Remove(gameObject);
-        _gameManager.rerolPlayer++;
+        _gameManager.playerCardsInPlay.Remove(gameObject);
         Destroy(gameObject);
         Debug.Log($"РеРолл");
     }
