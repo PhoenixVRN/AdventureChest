@@ -5,6 +5,8 @@ using UnityEngine;
 public class BattlService : MonoBehaviour
 {
     [SerializeField] private UpgradeDataBase dataBase;
+
+    [SerializeField] private GameObject resurrectionPanel;
     private Hero[] heroData;
     private GameManager _gameManager;
     private int batlleEnamy;
@@ -107,6 +109,8 @@ public class BattlService : MonoBehaviour
 
     private void ResurrectionHero()
     {
+        GameReferance.stateResurrectionHero = true;
+        resurrectionPanel.SetActive(true);
         
     }
     
