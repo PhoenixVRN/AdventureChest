@@ -12,6 +12,9 @@ public static class GameReferance
     internal static Transform CanvasGame => _canvasGame != null ? _canvasGame : _canvasGame = GameObject.FindObjectOfType<CanvasGame>().transform;
     private static Transform _canvasGame;
     
+    internal static Transform CardDistribution => _cardDistribution != null ? _cardDistribution : _cardDistribution = GameObject.FindObjectOfType<CardDistribution>().transform;
+    private static Transform _cardDistribution;
+    
     internal static Transform EnamyCardContainer => _enamyCardContainer != null ? _enamyCardContainer : _enamyCardContainer = GameObject.FindObjectOfType<EnamyCardContainer>().transform;
     private static Transform _enamyCardContainer;
     

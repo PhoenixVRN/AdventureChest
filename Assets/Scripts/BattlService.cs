@@ -7,6 +7,10 @@ public class BattlService : MonoBehaviour
     [SerializeField] private UpgradeDataBase dataBase;
 
     [SerializeField] private GameObject resurrectionPanel;
+    [SerializeField] private GameObject _playerHandsPanel;
+    [SerializeField] private GameObject _enamyHandsPanel;
+    
+    
     private Hero[] heroData;
     private GameManager _gameManager;
     private int batlleEnamy;
@@ -49,7 +53,7 @@ public class BattlService : MonoBehaviour
         {
             //TODO реализовать механику Добычи
             _gameManager.SetTextPanel("Добыча");
-            Reward();
+            Reward(player, enamy);
             return;
         }
 
@@ -76,8 +80,10 @@ public class BattlService : MonoBehaviour
         }
     }
 
-    private void Reward()
+    public void Reward(CardInfoPlayer player, CardInfoEnamy enamy)
     {
+        this.player = player;
+        this.enamy = enamy;
         _gameManager.resurrection = 0;
         if (enamy.TypeСreature == TypeСreature.Potion)
         {
@@ -109,9 +115,20 @@ public class BattlService : MonoBehaviour
 
     private void ResurrectionHero()
     {
+        _gameManager.playerRessChoice.Clear();
         GameReferance.stateResurrectionHero = true;
+        _playerHandsPanel.SetActive(false);
+        _enamyHandsPanel.SetActive(false);
         resurrectionPanel.SetActive(true);
         
+    }
+
+    public void CloseRessPnal()
+    {
+        GameReferance.stateResurrectionHero = false;
+        _playerHandsPanel.SetActive(true);
+        _enamyHandsPanel.SetActive(true);
+        resurrectionPanel.SetActive(false);
     }
     
     private void FightDragon()

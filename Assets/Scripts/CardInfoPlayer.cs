@@ -56,6 +56,25 @@ public class CardInfoPlayer : CardInfoBase, IPointerDownHandler, IPointerEnterHa
         return results;
     }
 
+    private void DetectRessPanel()
+    {
+        var k = RaycastMouse();
+        foreach (var VARIABLE in k)
+        {
+            if (VARIABLE.gameObject.GetComponent<OurChoice>() != null)
+            {
+                transform.SetParent(VARIABLE.gameObject.transform);
+                _gameManager.playerRessChoice.Add(gameObject);
+                GameReferance.CardDistribution.GetComponent<CardDistribution>().SetRessInPabelHero(TypeСreature);
+                _gameManager.resurrection--;
+                if (_gameManager.resurrection == 0)
+                {
+                    BattlService.Instance.CloseRessPnal();
+                }
+            }
+        }
+    }
+    
     private void DetectEnamy()
     {
         var k = RaycastMouse();
@@ -110,6 +129,7 @@ public class CardInfoPlayer : CardInfoBase, IPointerDownHandler, IPointerEnterHa
     public virtual void OnPointerExit(PointerEventData eventData)
     {
         if (GameReferance.isReroll) return;
+        
         var j = typeCard == TypeCard.Player ? GameReferance.PlayerCardContainer : GameReferance.EnamyCardContainer;
         transform.SetParent(j);
         transform.SetSiblingIndex(_siblingIndex);
@@ -123,6 +143,11 @@ public class CardInfoPlayer : CardInfoBase, IPointerDownHandler, IPointerEnterHa
         // var t = eventData.position;
         // transform.localPosition= t;
         transform.localPosition = InputPos();
+        if (GameReferance.stateResurrectionHero)
+        {
+            DetectRessPanel();
+        }
+       
         DetectEnamy();
     }
 
@@ -141,9 +166,11 @@ public class CardInfoPlayer : CardInfoBase, IPointerDownHandler, IPointerEnterHa
         {
             BattlService.Instance.Attake(this, oldEnamy.GetComponent<CardInfoEnamy>());
         }
+        
         else if (oldEnamy != null)
         {
             Debug.Log($"Добыча");
+            BattlService.Instance.Reward(this, oldEnamy.GetComponent<CardInfoEnamy>());
         }
     }
 }

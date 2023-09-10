@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour
     public int cemetery = 0;
     public int resurrection;
 
-    
+    public List<GameObject> playerRessChoice;
 
     public List<GameObject> playerCardsInPlay;
     public List<GameObject> enamyCardsInPlay;

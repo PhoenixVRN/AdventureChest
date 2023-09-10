@@ -10,6 +10,8 @@ public class CardDistribution : MonoBehaviour
     public List<GameObject> AllHeroCard;
     public List<GameObject> AllEmamyCard;
 
+    public GameObject panelChoice;
+
     public GameObject dragon;
 
     public GameObject containerHero;
@@ -67,6 +69,17 @@ public class CardDistribution : MonoBehaviour
         for (int i = 0; i < 3; i++)
         {
             _gameManager.enamyCardsInPlay.Add(Instantiate(dragon, containerEnamy.transform));
+        }
+    }
+
+    public void SetRessInPabelHero(TypeСreature typeСreature)
+    {
+        foreach (var hero in AllHeroCard)
+        {
+            if (hero.GetComponent<CardInfoPlayer>().TypeСreature == typeСreature)
+            {
+                Instantiate(hero, panelChoice.transform);
+            }
         }
     }
 }
