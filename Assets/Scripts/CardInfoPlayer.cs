@@ -17,6 +17,8 @@ public class CardInfoPlayer : CardInfoBase, IPointerDownHandler, IPointerEnterHa
     private GameObject oldEnamy;
 
     public bool IsBattle;
+    public bool IsRessPanel;
+    private Transform ressPanel;
 
     protected  GameManager _gameManager;
     void Start()
@@ -63,18 +65,28 @@ public class CardInfoPlayer : CardInfoBase, IPointerDownHandler, IPointerEnterHa
         {
             if (VARIABLE.gameObject.GetComponent<OurChoice>() != null)
             {
-                transform.SetParent(VARIABLE.gameObject.transform);
-                _gameManager.playerRessChoice.Add(gameObject);
-                GameReferance.CardDistribution.GetComponent<CardDistribution>().SetRessInPabelHero(TypeСreature);
-                _gameManager.resurrection--;
-                if (_gameManager.resurrection == 0)
-                {
-                    BattlService.Instance.CloseRessPnal();
-                }
+                ressPanel = VARIABLE.gameObject.transform;
+                IsRessPanel = true;
+                return;
             }
+        }
+        IsRessPanel = false;
+    }
+
+    private void RessHero()
+    {
+        if (!IsRessPanel) return;
+        transform.SetParent(ressPanel);
+        _gameManager.playerRessChoice.Add(gameObject);
+        GameReferance.CardDistribution.GetComponent<CardDistribution>().SetRessInPabelHero(TypeСreature);
+        _gameManager.resurrection--;
+        if (_gameManager.resurrection == 0)
+        {
+            BattlService.Instance.CloseRessPnal();
         }
     }
     
+
     private void DetectEnamy()
     {
         var k = RaycastMouse();
@@ -129,7 +141,12 @@ public class CardInfoPlayer : CardInfoBase, IPointerDownHandler, IPointerEnterHa
     public virtual void OnPointerExit(PointerEventData eventData)
     {
         if (GameReferance.isReroll) return;
-        
+
+        if (GameReferance.stateResurrectionHero && !IsRessPanel)
+        {
+            transform.SetParent(_gameManager.panelPotionRess.transform);
+            return;
+        }
         var j = typeCard == TypeCard.Player ? GameReferance.PlayerCardContainer : GameReferance.EnamyCardContainer;
         transform.SetParent(j);
         transform.SetSiblingIndex(_siblingIndex);
@@ -145,9 +162,11 @@ public class CardInfoPlayer : CardInfoBase, IPointerDownHandler, IPointerEnterHa
         transform.localPosition = InputPos();
         if (GameReferance.stateResurrectionHero)
         {
-            DetectRessPanel();
+            // DetectEnamy();
+             DetectRessPanel();
+             Debug.Log($"IsRessPanel {IsRessPanel}");
+             return;
         }
-       
         DetectEnamy();
     }
 
@@ -161,6 +180,12 @@ public class CardInfoPlayer : CardInfoBase, IPointerDownHandler, IPointerEnterHa
     public  virtual void OnEndDrag(PointerEventData eventData)
     {
         if (GameReferance.isReroll) return;
+
+        if (GameReferance.stateResurrectionHero)
+        {
+           RessHero();
+            return;
+        }
         // Debug.Log($"OnEndDrag");
         if (oldEnamy != null && BattlService.Instance.CheckButtleEnamy())
         {

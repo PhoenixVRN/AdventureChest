@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class BattlService : MonoBehaviour
 {
-    [SerializeField] private UpgradeDataBase dataBase;
+    public UpgradeDataBase dataBase;
 
-    [SerializeField] private GameObject resurrectionPanel;
-    [SerializeField] private GameObject _playerHandsPanel;
-    [SerializeField] private GameObject _enamyHandsPanel;
+    public GameObject resurrectionPanel;
+    public GameObject _playerHandsPanel;
+    public GameObject _enamyHandsPanel;
     
     
     private Hero[] heroData;

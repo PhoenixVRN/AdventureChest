@@ -9,6 +9,7 @@ public static class GameReferance
     public static bool isBattleDragon;
     public static bool stateReaward;
     public static bool stateResurrectionHero;
+    
     internal static Transform CanvasGame => _canvasGame != null ? _canvasGame : _canvasGame = GameObject.FindObjectOfType<CanvasGame>().transform;
     private static Transform _canvasGame;
     

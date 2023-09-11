@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
 
     public int cemetery = 0;
     public int resurrection;
+    public  GameObject panelPotionRess;
 
     public List<GameObject> playerRessChoice;
 

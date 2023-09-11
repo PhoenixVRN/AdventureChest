@@ -2207,6 +2207,7 @@ MonoBehaviour:
   countDragon: 0
   cemetery: 0
   resurrection: 0
+  panelPotionRess: {fileID: 1400256453}
   playerRessChoice: []
   playerCardsInPlay: []
   enamyCardsInPlay: []
