@@ -9,8 +9,8 @@ public class BattlService : MonoBehaviour
     public GameObject resurrectionPanel;
     public GameObject _playerHandsPanel;
     public GameObject _enamyHandsPanel;
-    
-    
+
+
     private Hero[] heroData;
     private GameManager _gameManager;
     private int batlleEnamy;
@@ -43,12 +43,12 @@ public class BattlService : MonoBehaviour
     {
         this.player = player;
         this.enamy = enamy;
-            
+
         if (GameReferance.isBattleDragon)
         {
-           FightDragon();
+            FightDragon();
         }
-        
+
         if (!enamy.isBattle && !CheckButtleEnamy())
         {
             //TODO реализовать механику Добычи
@@ -92,13 +92,13 @@ public class BattlService : MonoBehaviour
             _gameManager.cemetery++;
             Destroy(player.gameObject);
 
-            
+
             _gameManager.enamyCardsInPlay.Remove(enamy.gameObject);
             Destroy(enamy.gameObject);
-            
+
             for (int i = _gameManager.enamyCardsInPlay.Count - 1; i > -1; i--)
             {
-                if (_gameManager.enamyCardsInPlay[i].GetComponent<CardInfoEnamy>().TypeСreature == TypeСreature.Potion )
+                if (_gameManager.enamyCardsInPlay[i].GetComponent<CardInfoEnamy>().TypeСreature == TypeСreature.Potion)
                 {
                     var card = _gameManager.enamyCardsInPlay[i];
                     _gameManager.enamyCardsInPlay.RemoveAt(i);
@@ -115,6 +115,34 @@ public class BattlService : MonoBehaviour
         else
         {
             //TODO chest
+                _gameManager.Experience++;
+                _gameManager.playerCardsInPlay.Remove(player.gameObject);
+                _gameManager.cemetery++;
+                Destroy(player.gameObject);
+
+                _gameManager.enamyCardsInPlay.Remove(enamy.gameObject);
+                Destroy(enamy.gameObject);
+                
+                var count = 3;
+            if (player.TypeСreature == TypeСreature.Paladin || player.TypeСreature == TypeСreature.Thief)
+            {
+                 count--;
+                if (count > 0)
+                {
+                    for (int i = _gameManager.enamyCardsInPlay.Count - 1; i > -1; i--)
+                    {
+                        if (_gameManager.enamyCardsInPlay[i].GetComponent<CardInfoEnamy>().TypeСreature == TypeСreature.Chest && count != 0)
+                        {
+                            _gameManager.Experience++;
+                            var card = _gameManager.enamyCardsInPlay[i];
+                            _gameManager.enamyCardsInPlay.RemoveAt(i);
+                            Destroy(card);
+                            count--;
+                        }
+                    }
+                }
+            }
+            _gameManager.ActiveButtonEndTurn();
         }
     }
 
@@ -126,7 +154,6 @@ public class BattlService : MonoBehaviour
         _enamyHandsPanel.SetActive(false);
         resurrectionPanel.SetActive(true);
         _gameManager.textCountRess.text = _gameManager.resurrection.ToString();
-
     }
 
     public void CloseRessPnal()
@@ -140,6 +167,7 @@ public class BattlService : MonoBehaviour
             newHero.transform.SetParent(_playerHandsPanel.transform);
             _gameManager.playerCardsInPlay.Add(newHero);
         }
+
         _gameManager.playerRessChoice.Clear();
 
         if (_gameManager.enamyCardsInPlay.Count == 0)
@@ -147,9 +175,8 @@ public class BattlService : MonoBehaviour
             // _gameManager.LevelHandler();
             _gameManager.ActiveButtonEndTurn();
         }
-        
     }
-    
+
     private void FightDragon()
     {
         var war = false;
@@ -167,6 +194,7 @@ public class BattlService : MonoBehaviour
                     if (!CheckButtleEnamy())
                     {
                         _gameManager.SetTextPanel("Ебать ты крут!");
+                        _gameManager.Experience += 3;
                         _gameManager.ActiveButtonEndTurn();
                         threeHeroes.Clear();
                     }
@@ -186,6 +214,7 @@ public class BattlService : MonoBehaviour
                             threeHeroes.Clear();
                         }
                     }
+
                     return;
                 }
                 else
@@ -201,6 +230,7 @@ public class BattlService : MonoBehaviour
             return;
         }
     }
+
     private void Battle(CardInfoPlayer player, CardInfoEnamy enamy, int count)
     {
         var type = enamy.TypeСreature;
@@ -237,7 +267,7 @@ public class BattlService : MonoBehaviour
             _gameManager.ActiveButtonEndTurn();
         }
 
-        if (_gameManager.playerCardsInPlay.Count == 0 &&  CheckButtleEnamy())
+        if (_gameManager.playerCardsInPlay.Count == 0 && CheckButtleEnamy())
         {
             //TODO реализовать проигрышь
             _gameManager.SetTextPanel("Тебя сожрали!\nХа-Ха-Ха\nЛузер!");
@@ -254,6 +284,7 @@ public class BattlService : MonoBehaviour
                 return true;
             }
         }
+
         GameReferance.stateReaward = false;
         return false;
     }

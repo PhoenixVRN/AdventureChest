@@ -27,8 +27,21 @@ public class GameManager : MonoBehaviour
             countCemeteryText.text = _cemetery.ToString();
         }
     }
-
     private int _cemetery;
+
+    public int Experience
+    {
+        get { return _experience; }
+        set
+        {
+            _experience = value;
+            experienceText.text = "Experience " + _experience.ToString();
+        }
+
+    }
+    private int _experience;
+    
+    public TMP_Text experienceText;
     public TMP_Text countCemeteryText;
     public int resurrection;
     public  GameObject panelPotionRess;
