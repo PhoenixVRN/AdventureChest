@@ -80,6 +80,7 @@ public class CardInfoPlayer : CardInfoBase, IPointerDownHandler, IPointerEnterHa
         _gameManager.playerRessChoice.Add(gameObject);
         GameReferance.CardDistribution.GetComponent<CardDistribution>().SetRessInPabelHero(TypeСreature);
         _gameManager.resurrection--;
+        _gameManager.textCountRess.text = _gameManager.resurrection.ToString();
         if (_gameManager.resurrection == 0)
         {
             BattlService.Instance.CloseRessPnal();
@@ -164,7 +165,7 @@ public class CardInfoPlayer : CardInfoBase, IPointerDownHandler, IPointerEnterHa
         {
             // DetectEnamy();
              DetectRessPanel();
-             Debug.Log($"IsRessPanel {IsRessPanel}");
+             // Debug.Log($"IsRessPanel {IsRessPanel}");
              return;
         }
         DetectEnamy();

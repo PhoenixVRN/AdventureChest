@@ -87,6 +87,7 @@ public class BattlService : MonoBehaviour
         _gameManager.resurrection = 0;
         if (enamy.TypeСreature == TypeСreature.Potion)
         {
+            _gameManager.resurrection = 1;
             _gameManager.playerCardsInPlay.Remove(player.gameObject);
             _gameManager.cemetery++;
             Destroy(player.gameObject);
@@ -105,6 +106,10 @@ public class BattlService : MonoBehaviour
                     _gameManager.resurrection++;
                 }
             }
+
+            _gameManager.resurrection = _gameManager.resurrection > _gameManager.cemetery
+                ? _gameManager.cemetery
+                : _gameManager.resurrection;
             ResurrectionHero();
         }
         else
@@ -120,15 +125,29 @@ public class BattlService : MonoBehaviour
         _playerHandsPanel.SetActive(false);
         _enamyHandsPanel.SetActive(false);
         resurrectionPanel.SetActive(true);
-        
+        _gameManager.textCountRess.text = _gameManager.resurrection.ToString();
+
     }
 
     public void CloseRessPnal()
     {
-        GameReferance.stateResurrectionHero = false;
         _playerHandsPanel.SetActive(true);
         _enamyHandsPanel.SetActive(true);
         resurrectionPanel.SetActive(false);
+        GameReferance.stateResurrectionHero = false;
+        foreach (var newHero in _gameManager.playerRessChoice)
+        {
+            newHero.transform.SetParent(_playerHandsPanel.transform);
+            _gameManager.playerCardsInPlay.Add(newHero);
+        }
+        _gameManager.playerRessChoice.Clear();
+
+        if (_gameManager.enamyCardsInPlay.Count == 0)
+        {
+            // _gameManager.LevelHandler();
+            _gameManager.ActiveButtonEndTurn();
+        }
+        
     }
     
     private void FightDragon()

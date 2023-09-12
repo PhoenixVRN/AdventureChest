@@ -2205,10 +2205,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   countDragon: 0
-  cemetery: 0
+  countCemeteryText: {fileID: 1392289480}
   resurrection: 0
   panelPotionRess: {fileID: 1400256453}
   playerRessChoice: []
+  textCountRess: {fileID: 680311496}
   playerCardsInPlay: []
   enamyCardsInPlay: []
   textCountDragon: {fileID: 443394766}
@@ -3376,6 +3377,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1178477339}
   m_CullTransparentMesh: 1
+--- !u!114 &1392289480 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6711384692181809577, guid: 9d308e793bccd944eb457a56941908ec, type: 3}
+  m_PrefabInstance: {fileID: 2165270090510764755}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1400256453
 GameObject:
   m_ObjectHideFlags: 0
@@ -3751,11 +3763,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4a0cf7c8f56cb74284f532ec5c5da1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &1811242596 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 26567356316817300, guid: 9d308e793bccd944eb457a56941908ec, type: 3}
-  m_PrefabInstance: {fileID: 2165270090510764755}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1864315139
 GameObject:
   m_ObjectHideFlags: 0
@@ -3972,18 +3979,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 7273575359391196964, guid: 9d308e793bccd944eb457a56941908ec, type: 3}
   m_PrefabInstance: {fileID: 2165270090510764755}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2017895647
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1811242596}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b00517c780832064783d9b581d4cf26b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &2035019239
 GameObject:
   m_ObjectHideFlags: 0
@@ -4131,6 +4126,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cemetery
       objectReference: {fileID: 0}
+    - target: {fileID: 3739238078390974680, guid: 9d308e793bccd944eb457a56941908ec, type: 3}
+      propertyPath: m_Name
+      value: CountText
+      objectReference: {fileID: 0}
     - target: {fileID: 7273575359391196964, guid: 9d308e793bccd944eb457a56941908ec, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -4218,8 +4217,5 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 26567356316817300, guid: 9d308e793bccd944eb457a56941908ec, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2017895647}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9d308e793bccd944eb457a56941908ec, type: 3}

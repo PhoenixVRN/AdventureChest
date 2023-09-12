@@ -18,11 +18,23 @@ public class GameManager : MonoBehaviour
     private int _countRound;
     private CardDistribution _cardDistribution;
 
-    public int cemetery = 0;
+    public int cemetery
+    {
+        get { return _cemetery;}
+        set
+        {
+            _cemetery = value;
+            countCemeteryText.text = _cemetery.ToString();
+        }
+    }
+
+    private int _cemetery;
+    public TMP_Text countCemeteryText;
     public int resurrection;
     public  GameObject panelPotionRess;
 
     public List<GameObject> playerRessChoice;
+    public TMP_Text textCountRess;
 
     public List<GameObject> playerCardsInPlay;
     public List<GameObject> enamyCardsInPlay;
