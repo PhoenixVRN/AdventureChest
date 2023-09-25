@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 using Random = UnityEngine.Random;
 
 
@@ -19,8 +20,9 @@ using Random = UnityEngine.Random;
 
         protected bool _isRerollModeOn;
         public Action<bool> RerollModeChanged;
-        
 
+
+        public Action<Vector2> MoveView;
         public ViewModel(Model model)
         {
             _model = model;
@@ -30,6 +32,23 @@ using Random = UnityEngine.Random;
         }
 
         public void DownHandler()
+        {
+            MoveCard();
+        }
+        private Vector2 InputPos()
+        {
+            Vector2 localPoint = Vector2.zero;
+
+            RectTransformUtility.ScreenPointToLocalPointInRectangle(GameReferance.CanvasGame.GetComponent<RectTransform>(),
+                Input.mousePosition,
+                Camera.main, out localPoint);
+            return localPoint;
+        }
+        private void MoveCard()
+        {
+           MoveView?.Invoke(InputPos());
+        }
+        public void UpHandler()
         {
             
         }

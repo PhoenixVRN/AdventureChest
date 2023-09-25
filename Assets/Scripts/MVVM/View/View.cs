@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 
 
-public abstract class View : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
+public abstract class View : MonoBehaviour
     {
         protected ViewModel _viewModel;
 
@@ -13,12 +13,14 @@ public abstract class View : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
             _viewModel.ViewStateChanged += DisplaySpinResult;
             _viewModel.ViewGoldChanged += DisplayGold;
             _viewModel.ViewIsWinChanged += DisplayYouWin;
+            _viewModel.MoveView += MoveCard;
         }
 
         protected abstract void DisplaySpinResult(List<int> state);
         protected abstract void DisplayYouWin(bool isWin);
         protected abstract void DisplayGold(int gold);
-        protected abstract void DownHandler();
+        protected abstract void MoveCard(Vector2 pos);
+       
 
         protected virtual void Dispose()
         {
@@ -31,14 +33,5 @@ public abstract class View : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
         {
             Dispose();
         }
-
-        public void OnPointerDown(PointerEventData eventData)
-        {
-            _viewModel.DownHandler();
-        }
-
-        public void OnPointerUp(PointerEventData eventData)
-        {
-            throw new System.NotImplementedException();
-        }
+        
     }
