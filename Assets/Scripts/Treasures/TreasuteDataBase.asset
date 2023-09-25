@@ -14,12 +14,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TreasureBases:
   - treasureType: 0
+    countInGame: 3
   - treasureType: 1
+    countInGame: 3
   - treasureType: 2
+    countInGame: 3
   - treasureType: 3
+    countInGame: 3
   - treasureType: 4
+    countInGame: 3
   - treasureType: 5
+    countInGame: 4
   - treasureType: 6
+    countInGame: 6
   - treasureType: 7
+    countInGame: 3
   - treasureType: 8
+    countInGame: 4
   - treasureType: 9
+    countInGame: 4
